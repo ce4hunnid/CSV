@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import csv 
 from datetime import datetime
 
-open_file = open("sitka_weather_2018_simple.csv","r")
+open_file = open("death_valley_2018_simple.csv","r")
 
 csv_file = csv.reader(open_file, delimiter = ",")
 
@@ -18,19 +18,27 @@ dates =[]
 lows = []
 #Testing the datetime strptime function
 mydate = datetime.strptime('2018-07-01', '%Y-%m-%d')
-print(mydate)
-print(type(mydate))
+#print(mydate)
+#print(type(mydate))
 
 for rec in csv_file:
-    highs.append(int(rec[5]))
-    the_date = datetime.strptime(rec[2], '%Y-%m-%d')
-    dates.append(the_date)
-    lows.append(int(rec[6]))
+    try:
+        the_date = datetime.strptime(rec[2], '%Y-%m-%d')
+       
+        high = int(rec[4])                     #We received a value error since it tried to convert a null value into an integer
+        low = int(rec[5])                      #It will try to do THIS, if unsuccessful then it will display the print message, if succesful then it continues
+        
+    except ValueError:
+        print(f"Missing data for {the_date}")
+    else:
+        highs.append(high)
+        dates.append(the_date)
+        lows.append(low)                        #This is still a loop, it will do this for every record, if no error then it goes from try to else then LOOP
     
-print(highs)
-print(dates)
+#print(highs)
+#print(dates)
 
-print(lows)
+#print(lows)
 fig = plt.figure()
 
 plt.title("Daily High Temperatures, July 2018", fontsize = 16)    #THIS IS YOUR HOMEWORK... but you want highs and lows for 
@@ -58,3 +66,4 @@ plt.title("Lows")
 plt.suptitle("Highs and Lows of Sitka, Alaska")
 
 plt.show() #Will not show second graph until we close out first
+
