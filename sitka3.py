@@ -50,7 +50,7 @@ plt.show()
 plt.subplot(2,1,1) #2 rows, 1 column, 1 to choose 1st row
 plt.plot(dates,highs,c="red")
 plt.title("Highs")
-
+ 
 plt.subplot(2,1,2)
 plt.plot(dates,lows,c="blue")
 plt.title("Lows")

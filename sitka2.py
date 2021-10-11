@@ -38,3 +38,4 @@ plt.plot(dates, highs, c="red")
 fig.autofmt_xdate() #auto format the x axis with the dates
 plt.show()
 
+  
